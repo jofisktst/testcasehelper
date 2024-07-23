@@ -1,0 +1,113 @@
+.step {
+  border: 1px solid #ccc;
+  padding: 1px;
+  margin: 1px 0;
+  border-radius: 5px;
+  background-color: #f9f9f9;
+}
+
+.input-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+.input-groupnummer {
+  margin: 10px;
+  display: flex;
+  flex-direction: column;
+  width: 5%;
+}
+.input-group {
+  margin: 10px;
+  display: flex;
+  flex-direction: column;
+  
+}
+.input-grouptext {
+  margin: 10px;
+  display: flex;
+  flex-direction: column;
+  width: 38%;
+}
+
+.input-group label {
+  margin-bottom: 5px;
+}
+
+.input-group textarea {
+  padding: 1px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+
+}
+
+.button-group {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin: 1px;
+  width: 10%;
+}
+
+.delete-button {
+  background-color: #c21919;
+  color: white;
+  border: none;
+  padding: 10px 5px;
+  border-radius: 5px;
+  cursor: pointer;
+
+}
+.add-button {
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  padding: 1px 5px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 1px;
+}
+
+.delete-button:hover {
+  background-color: #b42828;
+}
+.add-button:hover {
+  background-color: #45a049;
+}
+
+.delete-button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.delete-step-button {
+  background-color: #c21919;
+  color: white;
+  border: none;
+  padding: 10px 5px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 22px;
+ 
+}
+.add-step-button {
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  padding: 10px 5px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 1px;
+}
+
+.delete-step-button:hover {
+  background-color: #b42828;
+}
+.add-step-button:hover {
+  background-color: #45a049;
+}
+
+.delete-step-button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}

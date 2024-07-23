@@ -1,0 +1,125 @@
+.testcase {
+  border: 1px solid #ccc;
+
+  margin: 2px 0;
+  border-radius: 5px;
+  background-color: #f9f9f9;
+  width: 100%; /* Fill the full width */
+  box-sizing: border-box; /* Include padding and border in the element's total width */
+}
+
+.input-group {
+  margin: 10px;
+}
+
+.input-groupnavn {
+  margin: 10px;
+  
+}
+
+.input-group label {
+  margin-right: 10px;
+}
+
+.input-group input,
+.input-group textarea {
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  width: 100%; /* Make inputs fill the width of their container */
+  box-sizing: border-box; /* Include padding and border in the element's total width */
+}
+
+.input-groupnummer span {
+
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #e9e9e9;
+}
+
+.input-row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: flex-start;
+  width: 100%; /* Ensure input row fills the full width */
+}
+
+.content-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-top: 10px;
+  width: 100%; /* Ensure content row fills the full width */
+}
+
+.beskrivelse-container {
+  flex: 0 0 24%;
+  display: flex;
+  flex-direction: column;
+}
+
+.steps-container {
+  flex: 0 0 75%;
+  display: flex;
+  flex-direction: column;
+  margin-top: 20px;
+}
+
+.krav {
+width: 5%;
+}
+.nummer {
+  width: 5%;
+}
+.navn {
+  width: 30%;
+  }
+
+.button-row {
+  display: flex;
+  justify-content: center;
+  align-items: left;
+  margin-top: 5px;
+  width: 100%; /* Ensure button row fills the full width */
+}
+
+.delete-button ,
+.next-button,
+.log-button {
+  color: white;
+  border: none;
+
+  border-radius: 5px;
+  cursor: pointer;
+
+}
+
+.delete-button {
+  background-color: #ff4d4d;
+}
+
+.next-button {
+  background-color: #4CAF50;
+}
+
+.delete-button:hover {
+  background-color: #ff1a1a;
+}
+
+.next-button:hover {
+  background-color: #45a049;
+}
+
+.log-button {
+  background-color: #ff4d4d;
+}
+
+.log-button:hover {
+  background-color: #ff1a1a;
+}
+
+button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
