@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/testcasehelper/static/css/main.75c66efd.css",
+    "main.js": "/testcasehelper/static/js/main.a6ac86d2.js",
+    "index.html": "/testcasehelper/index.html",
+    "main.75c66efd.css.map": "/testcasehelper/static/css/main.75c66efd.css.map",
+    "main.a6ac86d2.js.map": "/testcasehelper/static/js/main.a6ac86d2.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.75c66efd.css",
+    "static/js/main.a6ac86d2.js"
+  ]
+}
