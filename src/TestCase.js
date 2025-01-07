@@ -2,13 +2,13 @@ import React, { useState, useEffect } from 'react';
 import './TestCase.css';
 import Step from './Step';
 
-function TestCase({ id, krav, nummer, navn, pnr, beskrivelse, steps, designer, team, onDelete, addNextTestCase, updateTestCase }) {
+function TestCase({ id, krav, nummer, navn, pnummer, beskrivelse, steps, wnummer, team, onDelete, addNextTestCase, updateTestCase }) {
   const [clickCount, setClickCount] = useState(0);
 
   const handleKravChange = (e) => updateTestCase({ krav: e.target.value });
   const handleNummerChange = (e) => updateTestCase({ nummer: e.target.value });
   const handleNavnChange = (e) => updateTestCase({ navn: e.target.value });
-  const handlePnrChange = (e) => updateTestCase({ pnr: e.target.value });
+  const handlePnummerChange = (e) => updateTestCase({ pnummer: e.target.value });
   const handleBeskrivelseChange = (e) => updateTestCase({ beskrivelse: e.target.value });
 
   const handleStepChange = (index, updatedStep) => {
@@ -32,11 +32,11 @@ function TestCase({ id, krav, nummer, navn, pnr, beskrivelse, steps, designer, t
   };
 
   useEffect(() => {
-    const textArea = document.getElementById(`beskrivelse-${designer}-${team}-${id}`);
+    const textArea = document.getElementById(`beskrivelse-${wnummer}-${team}-${id}`);
     if (textArea) {
       textArea.rows = 7 + (steps.length - 1) * 8;
     }
-  }, [steps, designer, team, id]);
+  }, [steps, wnummer, team, id]);
 
   const handleDeleteClick = () => {
     setClickCount(prev => prev + 1);
@@ -82,18 +82,18 @@ function TestCase({ id, krav, nummer, navn, pnr, beskrivelse, steps, designer, t
           />
         </div>
         <div className="input-group">
-          <label htmlFor={`pnr-${id}`}>PNR:</label>
+          <label htmlFor={`pnummer-${id}`}>PNR:</label>
           <input
             type="text"
-            id={`pnr-${id}`}
-            name="pnr"
-            value={pnr}
-            onChange={handlePnrChange}
+            id={`pnummer-${id}`}
+            name="pnummer"
+            value={pnummer}
+            onChange={handlePnummerChange}
           />
         </div>
         <div className="input-group">
           <label>Designer:</label>
-          <span>{designer}</span>
+          <span>{wnummer}</span>
         </div>
         <div className="input-group">
           <label>Ansvarligt Team:</label>
@@ -102,9 +102,9 @@ function TestCase({ id, krav, nummer, navn, pnr, beskrivelse, steps, designer, t
       </div>
       <div className="content-row">
         <div className="beskrivelse-container">
-          <label htmlFor={`beskrivelse-${designer}-${team}-${id}`}>Beskrivelse:</label>
+          <label htmlFor={`beskrivelse-${wnummer}-${team}-${id}`}>Beskrivelse:</label>
           <textarea
-            id={`beskrivelse-${designer}-${team}-${id}`}
+            id={`beskrivelse-${wnummer}-${team}-${id}`}
             name="beskrivelse"
             rows="8"
             value={beskrivelse}

@@ -4,9 +4,10 @@ import TestCase from './TestCase';
 import * as XLSX from 'xlsx';
 
 function App() {
-  const [designer, setDesigner] = useState('');
+  const [wnummer, setWnummer] = useState('');
   const [team, setTeam] = useState('');
   const [testCases, setTestCases] = useState([]);
+
 
   const addTestCase = (initialValues = {}) => {
     setTestCases([
@@ -16,7 +17,7 @@ function App() {
         nummer: initialValues.nummer || '',
         krav: initialValues.krav || '',
         navn: '',
-        pnr: '',
+        pnummer: '',
         beskrivelse: 'Formål:\nForudsætninger:',
         steps: [{ id: 0, stepNummer: 1, stepBeskrivelse: '', stepExpected: '' }]
       },
@@ -31,7 +32,7 @@ function App() {
     setTestCases(testCases.filter(tc => tc.id !== id));
   };
 
-  const logDataset = () => {
+  const logSlut = () => {
     const dataset = [];
     testCases.forEach(tc => {
       tc.steps.forEach(step => {
@@ -42,14 +43,14 @@ function App() {
           Eksekveringsform: 'Manuel',
           Prioritet: '1. Skal',
           'Del af regressionstest': 'Nej',
-          Designer: designer,
-          'Ansvarlig team': team,
+          Designer: wnummer,
+          'Ansvarligt team': team,
           Status: 'Færdig, klar til brug',
           Comments: '',
-          PNR: String(tc.pnr),
-          Description: 'PNR: ' + String(tc.pnr) + "\n" + String(tc.beskrivelse),
+          PNR: String(tc.pnummer),
+          Description: 'PNR: ' + String(tc.pnummer) + "\n" + String(tc.beskrivelse),
           'Step Name (Design Steps)': step.stepNummer,
-          'Description (Design Steps': "PNR: " + String(tc.pnr) + "\n\n" + String(step.stepBeskrivelse),
+          'Description (Design Steps)': "PNR: " + String(tc.pnummer) + "\n\n" + String(step.stepBeskrivelse),
           'Expected Results (Design Steps)': step.stepExpected,
           'Faktisk Resultat': '',
           Gennemførelsesstatus: 'No Run',
@@ -58,8 +59,8 @@ function App() {
           krav: tc.krav,
           nummer: String(Number(tc.nummer) + 10000).slice(1),
           navn: tc.navn,
-          pnr: tc.pnr,
-          designer,
+          pnummer: tc.pnummer,
+          wnummer,
           team,
           beskrivelse: tc.beskrivelse,
           stepNummer: step.stepNummer,
@@ -69,6 +70,7 @@ function App() {
       });
     });
 
+    
     // Create a worksheet from the dataset
     const worksheet = XLSX.utils.json_to_sheet(dataset);
     // Create a workbook and add the worksheet
@@ -76,10 +78,61 @@ function App() {
     XLSX.utils.book_append_sheet(workbook, worksheet, "TestCases");
 
     // Create a binary string from the workbook and trigger a download
-    XLSX.writeFile(workbook, "TestCases.xlsx");
+    XLSX.writeFile(workbook, "TestCasesÅrop.xlsx");
 
     console.log(dataset);
   };
+
+
+  const logForskud = () => {
+    const dataset = [];
+    testCases.forEach(tc => {
+      tc.steps.forEach(step => {
+        dataset.push({
+          Subject: '',
+          'Test Name': String(tc.krav) + "-" + String(Number(tc.nummer) + 10000).slice(1) + " " + String(tc.navn),
+          Type: 'MANUAL',
+          Eksekveringsform: 'Manuel',
+          Prioritet: '2 Høj',
+          'Regression Test': 'Nej',
+          Designer: wnummer,
+          'Ansvarligt team': team,
+          Status: 'F - Færdig, klar til brug',
+          Description: 'PNR: ' + String(tc.pnummer) + "\n" + String(tc.beskrivelse),
+          Comments: '',
+          'Step Name (Design Steps)': step.stepNummer,
+          'Description (Design Steps)': "PNR: " + String(tc.pnummer) + "\n\n" + String(step.stepBeskrivelse),
+          'Expected Results (Design Steps)': step.stepExpected,
+          Testtypegruppe: 'F - Funktionel test',
+          'Funktionelt element': '',
+          'testcasehjælperlinjerherefter': '||||',
+          krav: tc.krav,
+          nummer: String(Number(tc.nummer) + 10000).slice(1),
+          navn: tc.navn,
+          pnummer: tc.pnummer,
+          wnummer,
+          team,
+          beskrivelse: tc.beskrivelse,
+          stepNummer: step.stepNummer,
+          stepBeskrivelse: step.stepBeskrivelse,
+          stepExpected: step.stepExpected,
+        });
+      });
+    });
+
+    
+    // Create a worksheet from the dataset
+    const worksheet = XLSX.utils.json_to_sheet(dataset);
+    // Create a workbook and add the worksheet
+    const workbook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(workbook, worksheet, "TestCases");
+
+    // Create a binary string from the workbook and trigger a download
+    XLSX.writeFile(workbook, "TestCasesForskud.xlsx");
+
+    console.log(dataset);
+  };
+
 
   const handleFileUpload = (event) => {
     const file = event.target.files[0];
@@ -96,7 +149,7 @@ function App() {
       const importedTestCases = [];
 
       jsonData.forEach(row => {
-        const { krav, nummer, navn, pnr, beskrivelse, stepNummer, stepBeskrivelse, stepExpected } = row;
+        const { krav, nummer, navn, pnummer, beskrivelse, stepNummer, stepBeskrivelse, stepExpected } = row;
 
         let testCase = importedTestCases.find(tc => tc.krav === krav && tc.nummer === nummer);
         if (!testCase) {
@@ -105,7 +158,7 @@ function App() {
             krav,
             nummer,
             navn,
-            pnr,
+            pnummer,
             beskrivelse,
             steps: []
           };
@@ -133,24 +186,31 @@ function App() {
       </header>
       <div className="input-container">
         <div className="input-group">
-          <label htmlFor="designer">Designer:</label>
+          <label htmlFor="designer">Designer (W-nummer):</label>
           <input
             type="text"
             id="designer"
-            name="designer"
-            value={designer}
-            onChange={(e) => setDesigner(e.target.value)}
+            name="designer (wnummer)"
+            value={wnummer}
+            onChange={(e) => setWnummer(e.target.value)}
           />
         </div>
         <div className="input-group">
+
           <label htmlFor="ansvarligt-team">Ansvarligt Team:</label>
-          <input
-            type="text"
-            id="ansvarligt-team"
+          <select
             name="ansvarligt-team"
-            value={team}
-            onChange={(e) => setTeam(e.target.value)}
-          />
+            onChange={(choice) => setTeam(choice.target.value)}
+            >
+              <option value=''>Vælg team</option>
+              <option value='Værdipapirer'>Værdipapirer</option>
+              <option value='Borgere'>Borgere</option>
+              <option value='Udland'>Udland</option>
+              <option value='Beregninger'>Beregninger</option>
+            
+            
+            </select>
+          
         </div>
       </div>
       <div className="testcase-container">
@@ -158,7 +218,7 @@ function App() {
           <TestCase
             key={tc.id}
             {...tc}
-            designer={designer}
+            wnummer={wnummer}
             team={team}
             onDelete={() => deleteTestCase(tc.id)}
             addNextTestCase={(values) => addTestCase(values)}
@@ -167,7 +227,8 @@ function App() {
         ))}
       </div>
       <button className="add-button" onClick={() => addTestCase()}>Add Test Case</button>
-      <button className="log-dataset-button" onClick={logDataset}>Log Dataset</button>
+      <button className="log-dataset-button" onClick={logSlut}>Dan ark til Årop</button>
+      <button className="log-dataset-button" onClick={logForskud}>Dan ark til Forskud</button>
       <input
         type="file"
         accept=".xlsx, .xls"
